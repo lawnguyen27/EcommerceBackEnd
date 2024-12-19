@@ -13,6 +13,7 @@ namespace ShopLibrary.Repository.Interface
         IEnumerable<Product> GetProducts(int pageNumber, int pageSize);
         Product GetProductByID(int productId);
         IEnumerable<Product> GetProductListBySex(int pageNumber, int pageSize,string sex);
+        IEnumerable<Product> GetProductListByCategory(int pageNumber, int pageSize, int cateid);
 
         Product InsertProduct(Product product);
         void DeleteProduct(Product product);

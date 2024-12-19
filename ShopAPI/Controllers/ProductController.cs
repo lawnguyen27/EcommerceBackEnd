@@ -109,6 +109,25 @@ namespace ShopAPI.Controllers
             var productResponse = mapper.Map<List<ProductResponse>>(products);
             return Ok(productResponse);
         }
+        [HttpGet("category")]
+
+        public ActionResult<IQueryable<ProductResponse>> GetByCategory(int pageNumber, int pageSize, int cateid)
+        {
+            var products = repository.GetProductListByCategory(pageNumber, pageSize, cateid);
+
+            if (products == null || !products.Any())
+            {
+                return BadRequest("No products found.");
+            }
+
+            // Kiểm tra mapper
+            if (mapper == null)
+            {
+                throw new Exception("Mapper is not initialized.");
+            }
+            var productResponse = mapper.Map<List<ProductResponse>>(products);
+            return Ok(productResponse);
+        }
         // POST api/<UserController>
 
 

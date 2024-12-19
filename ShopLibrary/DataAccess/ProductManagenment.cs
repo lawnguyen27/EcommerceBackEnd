@@ -82,7 +82,24 @@ namespace ShopLibrary.DataAccess
             }
             return products;
         }
-
+        public IEnumerable<Product> GetProductListByCategory(int pageNumber, int pageSize, int cateid)
+        {
+            List<Product> products;
+            try
+            {
+                var DB = new EcommerceDbContext();
+                products = DB.Products
+                .Where(p => p.CategoryId==cateid) // Lọc sản phẩm theo thuộc tính 'categoryid'
+                .Skip((pageNumber - 1) * pageSize) // Bỏ qua sản phẩm trước trang hiện tại
+                .Take(pageSize) // Lấy số lượng sản phẩm theo kích thước trang
+                .ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("An error occurred while fetching products by sex: " + ex.Message);
+            }
+            return products;
+        }
         public Product AddNew(Product product)
         {
             try

@@ -14,6 +14,7 @@ namespace ShopLibrary.Repository
         public IEnumerable<Product> GetProducts(int pageNumber, int pageSize) => ProductManagement.Instance.GetProductList(pageNumber, pageSize);
         public Product GetProductByID(int pid) => ProductManagement.Instance.GetProductByID(pid);
         public IEnumerable<Product> GetProductListBySex(int pageNumber, int pageSize,string sex) => ProductManagement.Instance.GetProductListBySex(pageNumber, pageSize,sex);
+        public IEnumerable<Product> GetProductListByCategory(int pageNumber, int pageSize, int cateid) => ProductManagement.Instance.GetProductListByCategory(pageNumber, pageSize, cateid);
 
         public Product InsertProduct(Product p) => ProductManagement.Instance.AddNew(p);
         public void DeleteProduct(Product p) => ProductManagement.Instance.Remove(p);
