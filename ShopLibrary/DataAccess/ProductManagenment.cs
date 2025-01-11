@@ -71,7 +71,7 @@ namespace ShopLibrary.DataAccess
             {
                 var DB = new EcommerceDbContext();
                 products = DB.Products
-                .Where(p => p.Sex == sex) // Lọc sản phẩm theo thuộc tính 'Sex'
+                .Where(p => p.Category.CategoryType.Name == sex) // Lọc sản phẩm theo thuộc tính 'Sex'
                 .Skip((pageNumber - 1) * pageSize) // Bỏ qua sản phẩm trước trang hiện tại
                 .Take(pageSize) // Lấy số lượng sản phẩm theo kích thước trang
                 .ToList();

@@ -21,6 +21,8 @@ public partial class EcommerceDbContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<CategoryType> CategoryTypes { get; set; }
+
     public virtual DbSet<Order> Orders { get; set; }
 
     public virtual DbSet<OrderItem> OrderItems { get; set; }
@@ -108,6 +110,19 @@ public partial class EcommerceDbContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("updated_at");
+
+            entity.HasOne(d => d.CategoryType).WithMany(p => p.Categories)
+                .HasForeignKey(d => d.CategoryTypeId)
+                .HasConstraintName("FK_Category_CategoryType");
+        });
+
+        modelBuilder.Entity<CategoryType>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Category__3214EC072B910960");
+
+            entity.ToTable("CategoryType");
+
+            entity.Property(e => e.Name).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -221,9 +236,6 @@ public partial class EcommerceDbContext : DbContext
             entity.Property(e => e.Price)
                 .HasColumnType("decimal(18, 2)")
                 .HasColumnName("price");
-            entity.Property(e => e.Sex)
-                .HasMaxLength(10)
-                .HasDefaultValue("Unisex");
             entity.Property(e => e.UpdatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")

@@ -6,7 +6,7 @@ namespace ShopAPI.Request
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CategoryRequest : ControllerBase
+    public class CategoryRequest 
     {
         public int CategoryId { get; set; }
 
@@ -14,8 +14,7 @@ namespace ShopAPI.Request
 
         public string? Description { get; set; }
         public string urlImg {  get; set; }
-        public DateTime? CreatedAt { get; set; }
+        public int CategoryTypeId { get; set; }
 
-        public DateTime? UpdatedAt { get; set; }
     }
 }

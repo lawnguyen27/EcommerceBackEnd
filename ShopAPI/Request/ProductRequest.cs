@@ -11,8 +11,6 @@ namespace ShopAPI.Request
 
         public decimal Price { get; set; }
 
-        public string? Sex { get; set; }
-
         public int CategoryId { get; set; }
 
         public string ImageUrl { get; set; }

@@ -90,11 +90,11 @@ namespace ShopAPI.Controllers
              return Ok(product);
          }
        // [Authorize]
-        [HttpGet("sex")]
+        [HttpGet("CategoryType")]
 
-        public ActionResult<IQueryable<ProductResponse>> GetBySex(int pageNumber, int pageSize,string sex)
+        public ActionResult<IQueryable<ProductResponse>> GetByCategoryType(int pageNumber, int pageSize,string categoryType)
         {
-            var products = repository.GetProductListBySex(pageNumber,pageSize,sex);
+            var products = repository.GetProductListBySex(pageNumber,pageSize,categoryType);
 
             if (products == null || !products.Any())
             {

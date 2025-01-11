@@ -21,8 +21,6 @@ public partial class Product
 
     public DateTime? UpdatedAt { get; set; }
 
-    public string Sex { get; set; } = null!;
-
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     public virtual Category? Category { get; set; }
