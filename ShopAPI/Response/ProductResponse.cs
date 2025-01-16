@@ -1,4 +1,6 @@
-﻿namespace ShopAPI.Response
+﻿using ShopLibrary.BussinessObject;
+
+namespace ShopAPI.Response
 {
     public class ProductResponse
     {
@@ -7,11 +9,10 @@
 
         public string Description { get; set; }
 
+        public List<ProductImage> ProductImages { get; set; }
+        public string Price { get; set; }
 
-        public string Sex { get; set; }
 
-
-        public string ImageUrl { get; set; }
 
 
 

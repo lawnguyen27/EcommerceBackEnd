@@ -22,15 +22,16 @@ namespace ShopAPI.Controllers
     {
         IProductRepository repository = new ProductRepository();
         IProductSizeRepository productSizeRepository = new ProductSizeRepository();
+        ICategoryRepository categoryRepository = new CategoryRepository();
         IMapper mapper;
         public ProductController(IMapper mapper)
         {
             this.mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
           
         }
-        [Authorize(Roles = "admin,customer")]
-        [HttpGet("all")]
-        public ActionResult<IQueryable<ProductRequest>> Get( int pageNumber,int pageSize)
+/*        [Authorize(Roles = "admin,customer")]
+*/        [HttpGet("all")]
+        public ActionResult<IQueryable<ProductResponse>> Get( int pageNumber,int pageSize)
         {
 
             var products =repository.GetProducts(pageNumber,pageSize);
@@ -45,8 +46,8 @@ namespace ShopAPI.Controllers
             {
                 throw new Exception("Mapper is not initialized.");
             }
-            var productRequests = mapper.Map<List<ProductRequest>>(products);
-            return Ok(productRequests);
+            var productResponse = mapper.Map<List<ProductResponse>>(products);
+            return Ok(productResponse);
         }
         [Authorize(Roles = "admin")]
         [HttpPost]
@@ -114,10 +115,11 @@ namespace ShopAPI.Controllers
         public ActionResult<IQueryable<ProductResponse>> GetByCategory(int pageNumber, int pageSize, int cateid)
         {
             var products = repository.GetProductListByCategory(pageNumber, pageSize, cateid);
+            var category = categoryRepository.GetCategoryByID(cateid);
 
-            if (products == null || !products.Any())
+            if (category == null )
             {
-                return BadRequest("No products found.");
+                return BadRequest("No category found.");
             }
 
             // Kiểm tra mapper
@@ -148,8 +150,8 @@ namespace ShopAPI.Controllers
                 u.Price = productRequest.Price;
                 u.Description = productRequest.Description;
                 u.CategoryId = productRequest.CategoryId;
-                u.ImageUrl = productRequest.ImageUrl;
-
+/*                u.ImageUrl = productRequest.ImageUrl;
+*/
                 u.UpdatedAt = DateTime.Now;
             }
             repository.UpdateProduct(u);

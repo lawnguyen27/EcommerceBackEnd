@@ -39,6 +39,7 @@ namespace ShopLibrary.DataAccess
             {
                 var DB = new EcommerceDbContext();
                 products = DB.Products
+                    .Include(p => p.ProductImages)
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
                     .ToList();
@@ -56,7 +57,7 @@ namespace ShopLibrary.DataAccess
             try
             {
                 var DB = new EcommerceDbContext();
-                product = DB.Products.SingleOrDefault(x => x.ProductId == productId);
+                product = DB.Products.Include(p => p.ProductImages).SingleOrDefault(x => x.ProductId == productId);
             }
             catch (Exception ex)
             {
@@ -71,6 +72,7 @@ namespace ShopLibrary.DataAccess
             {
                 var DB = new EcommerceDbContext();
                 products = DB.Products
+                .Include(p => p.ProductImages)
                 .Where(p => p.Category.CategoryType.Name == sex) // Lọc sản phẩm theo thuộc tính 'Sex'
                 .Skip((pageNumber - 1) * pageSize) // Bỏ qua sản phẩm trước trang hiện tại
                 .Take(pageSize) // Lấy số lượng sản phẩm theo kích thước trang
@@ -89,6 +91,7 @@ namespace ShopLibrary.DataAccess
             {
                 var DB = new EcommerceDbContext();
                 products = DB.Products
+                .Include(p => p.ProductImages)
                 .Where(p => p.CategoryId==cateid) // Lọc sản phẩm theo thuộc tính 'categoryid'
                 .Skip((pageNumber - 1) * pageSize) // Bỏ qua sản phẩm trước trang hiện tại
                 .Take(pageSize) // Lấy số lượng sản phẩm theo kích thước trang
