@@ -20,7 +20,7 @@ namespace ShopAPI.Controllers
             // Kiểm tra null hoặc rỗng
             if (categories == null || !categories.Any())
             {
-                return BadRequest("No categories found.");
+                return Ok("No categories found.");
             }     
             return Ok(categories);
         }

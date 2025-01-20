@@ -11,6 +11,7 @@ namespace ShopAPI.Mapper
         {
             CreateMap<Product, ProductRequest>();
             CreateMap<Product, ProductResponse>();
+            CreateMap<Size, ProductSizeReponse>();
 
             CreateMap<ProductRequest, Product>()
            .ForMember(dest => dest.CreatedAt, opt => opt.Ignore())  // Bỏ qua các trường không cần thiết

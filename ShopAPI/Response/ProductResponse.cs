@@ -10,6 +10,8 @@ namespace ShopAPI.Response
         public string Description { get; set; }
 
         public List<ProductImage> ProductImages { get; set; }
+        public List<ProductSize> ProductSizes{ get; set; }
+
         public string Price { get; set; }
 
 

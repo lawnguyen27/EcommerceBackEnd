@@ -25,4 +25,8 @@
     <ProjectReference Include="..\ShopLibrary\ShopLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\" />
+  </ItemGroup>
+
 </Project>
